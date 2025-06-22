@@ -23,7 +23,15 @@ class LanguageServiceHost implements ts.LanguageServiceHost {
 
 	// for ts.LanguageServiceHost
 
-	getCompilationSettings = () => ts.getDefaultCompilerOptions();
+	getCompilationSettings = () => {
+		const options = ts.getDefaultCompilerOptions();
+		// Fix case sensitivity for module options to prevent TS5109 error
+		if (options.module === ts.ModuleKind.NodeNext || (options.module as any) === 'nodenext') {
+			options.module = ts.ModuleKind.NodeNext;
+			options.moduleResolution = ts.ModuleResolutionKind.NodeNext;
+		}
+		return options;
+	};
 	getScriptFileNames = () => Object.keys(this.files);
 	getScriptVersion = (_fileName: string) => '0';
 	getScriptSnapshot = (fileName: string) => this.files[fileName];

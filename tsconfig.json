@@ -1,0 +1,21 @@
+{
+	"extends": "./src/tsconfig.base.json",
+	"compilerOptions": {
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"allowJs": true,
+		"noEmit": true,
+		"skipLibCheck": true
+	},
+	"ts-node": {
+		"esm": true,
+		"experimentalSpecifierResolution": "node",
+		"compilerOptions": {
+			"module": "NodeNext",
+			"moduleResolution": "NodeNext"
+		}
+	}
+}
